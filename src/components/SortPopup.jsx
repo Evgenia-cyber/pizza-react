@@ -48,6 +48,7 @@ function SortPopup({ filters }) {
                 <li
                   onClick={() => {
                     setActiveFilter(index);
+                    setVisiblePopup(false);
                   }}
                   key={filter}
                   className={index === activeFilter ? 'active' : ''}
@@ -55,9 +56,6 @@ function SortPopup({ filters }) {
                   {filter}
                 </li>
               ))}
-            {/* <li className="active">популярности</li>
-            <li>цене</li>
-            <li>алфавиту</li> */}
           </ul>
         </div>
       )}
