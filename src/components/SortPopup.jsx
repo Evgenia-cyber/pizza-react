@@ -6,6 +6,8 @@ function SortPopup({ filters }) {
 
   const sortRef = useRef();
 
+  const activeItem = filters[activeFilter];
+
   const toggleVisiblePopup = () => {
     setVisiblePopup((visiblePopup) => !visiblePopup);
   };
@@ -41,7 +43,7 @@ function SortPopup({ filters }) {
           />
         </svg>
         <b>Сортировка по:</b>
-        <span onClick={toggleVisiblePopup}>популярности</span>
+        <span onClick={toggleVisiblePopup}>{activeItem}</span>
       </div>
       {visiblePopup && (
         <div className="sort__popup">
