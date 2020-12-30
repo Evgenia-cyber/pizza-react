@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
 
-function Categories({ categories, onClickItem }) {
+function Categories({ categories }) {
   const [activeItem, setActiveItem] = useState(0);
+
+  const onSelectedItem = (index) => {
+    setActiveItem(index);
+  };
+
   return (
     <div className="categories">
       <ul>
@@ -10,8 +15,7 @@ function Categories({ categories, onClickItem }) {
             <li
               className={activeItem === index ? 'active' : ''}
               onClick={() => {
-                onClickItem(category);
-                setActiveItem(index);
+                onSelectedItem(index);
               }}
               key={category}
             >
