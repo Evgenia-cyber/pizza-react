@@ -26,7 +26,6 @@ function PizzaBlock({ imageUrl, name, sizes, price, types }) {
                 onActiveType(index);
               }}
               key={type}
-              //   className={activeType === index ? 'active' : ''}
               className={classNames({
                 active: activeType === index,
                 disabled: !types.includes(index),
