@@ -16,7 +16,13 @@ function Home({ pizzas }) {
             'Закрытые',
           ]}
         />
-        <SortPopup filters={['популярности', 'цене', 'алфавиту']} />
+        <SortPopup
+          filters={[
+            { name: 'популярности', type: 'popular' },
+            { name: 'цене', type: 'price' },
+            { name: 'алфавиту', type: 'alfabet' },
+          ]}
+        />
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">

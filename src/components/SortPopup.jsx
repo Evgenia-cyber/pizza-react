@@ -6,7 +6,7 @@ function SortPopup({ filters }) {
 
   const sortRef = useRef();
 
-  const activeItem = filters[activeFilter];
+  const activeItem = filters[activeFilter].name;
 
   const toggleVisiblePopup = () => {
     setVisiblePopup((visiblePopup) => !visiblePopup);
@@ -57,10 +57,10 @@ function SortPopup({ filters }) {
                   onClick={() => {
                     onSelectedItem(index);
                   }}
-                  key={filter}
+                  key={filter.type}
                   className={index === activeFilter ? 'active' : ''}
                 >
-                  {filter}
+                  {filter.name}
                 </li>
               ))}
           </ul>
