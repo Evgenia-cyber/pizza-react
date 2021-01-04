@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import axios from 'axios';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { Header } from './components';
 import Cart from './pages/Cart';
@@ -10,9 +10,6 @@ import { setPizzas } from './redux/reducers/pizzasReducer';
 
 function App() {
   const dispatch = useDispatch();
-  const { pizzas } = useSelector((state) => ({
-    pizzas: state.pizzasReducer.pizzas,
-  }));
 
   React.useEffect(() => {
     axios
@@ -24,7 +21,7 @@ function App() {
     <div className="wrapper">
       <Header />
       <div className="content">
-        <Route exact path="/" render={() => <Home pizzas={pizzas} />} />
+        <Route exact path="/" component={Home} />
         <Route path="/cart" component={Cart} />
       </div>
     </div>
