@@ -13,8 +13,8 @@ function App() {
 
   React.useEffect(() => {
     axios
-      .get('http://localhost:3000/db.json')
-      .then((response) => dispatch(setPizzas(response.data.pizzas)));
+      .get('http://localhost:3001/pizzas')
+      .then(({ data }) => dispatch(setPizzas(data)));
   }, [dispatch]);
 
   return (
@@ -22,7 +22,7 @@ function App() {
       <Header />
       <div className="content">
         <Route exact path="/" component={Home} />
-        <Route path="/cart" component={Cart} />
+        <Route exact path="/cart" component={Cart} />
       </div>
     </div>
   );

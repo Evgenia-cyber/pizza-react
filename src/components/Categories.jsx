@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 
-function Categories({ categories }) {
+const Categories = React.memo(({ categories, onClickItem }) => {
   const [activeItem, setActiveItem] = useState(0);
 
   const onSelectedItem = (index) => {
-    setActiveItem(index);
+    setActiveItem(index); //при клике передаем в локальный state индекс кликнутой категории
+    onClickItem(index); //при клике передаем в <Home/> индекс кликнутой категории в activeCategoryIndexFromUIClick
   };
-
   return (
     <div className="categories">
       <ul>
@@ -25,7 +25,7 @@ function Categories({ categories }) {
       </ul>
     </div>
   );
-}
+});
 // class Categories extends React.Component {
 //   state = {
 //     activeItem: 0,
