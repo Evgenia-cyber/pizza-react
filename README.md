@@ -1,3 +1,15 @@
+Полный стек:
+- ReactJS
+- redux (библиотека для хранения данных на клиентской части)
+- react-redux (доп. библиотека для удобной работы с Redux.)
+- redux-thunk (доп. библиотека для Redux. Асинхроные действия)
+- react-router-dom (библиотека для реализации переходов без перезагрузки страницы)
+- axios (библиотека для отправки AJAX-запросов)
+- prop-types (библиотека для контроля типа данных)
+- json-server (для хранения пицц на фейковом сервере)
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
