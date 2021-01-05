@@ -1,12 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-const Categories = React.memo(({ categories, onClickItem }) => {
-  const [activeItem, setActiveItem] = useState(0);
-
-  const onSelectedItem = (index) => {
-    setActiveItem(index); //при клике передаем в локальный state индекс кликнутой категории
-    onClickItem(index); //при клике передаем в <Home/> индекс кликнутой категории в activeCategoryIndexFromUIClick
-  };
+const Categories = React.memo(({ categories, onClickItem, activeItem }) => {
   return (
     <div className="categories">
       <ul>
@@ -15,7 +10,7 @@ const Categories = React.memo(({ categories, onClickItem }) => {
             <li
               className={activeItem === index ? 'active' : ''}
               onClick={() => {
-                onSelectedItem(index);
+                onClickItem(index); //при клике передаем в <Home/> индекс кликнутой категории в activeCategoryIndexFromUIClick
               }}
               key={category}
             >
@@ -26,6 +21,14 @@ const Categories = React.memo(({ categories, onClickItem }) => {
     </div>
   );
 });
+
+Categories.propTypes = {
+  categories: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onClickItem: PropTypes.func.isRequired,
+  activeItem: PropTypes.number.isRequired,
+};
+Categories.defaultProps = { categories: [] };
+
 // class Categories extends React.Component {
 //   state = {
 //     activeItem: 0,

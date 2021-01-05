@@ -3,7 +3,7 @@ const SET_ACTIVE_CATEGORY = 'filterReducer/SET_ACTIVE_CATEGORY';
 
 const initialState = {
   activeCategoryIndex: 0,
-  activeSortBy: 'popular',
+  activeSortBy: 'rating',
 };
 
 const filterReducer = (state = initialState, action) => {

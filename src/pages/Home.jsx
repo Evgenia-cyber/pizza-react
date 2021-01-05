@@ -3,7 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Categories, SortPopup } from '../components';
 import PizzaBlock from '../components/PizzaBlock';
 import PizzaLoadingBlock from '../components/PizzaLoadingBlock';
-import { setActiveCategory } from '../redux/reducers/filterReducer';
+import {
+  setActiveCategory,
+  setActiveSortBy,
+} from '../redux/reducers/filterReducer';
 import { fetchPizzas } from '../redux/reducers/pizzasReducer';
 
 function Home() {
@@ -14,13 +17,23 @@ function Home() {
     isLoaded: state.pizzasReducer.isLoaded,
   }));
 
+  const { activeCategoryIndex, activeSortBy } = useSelector(
+    ({ filterReducer }) => filterReducer,
+  );
+
   React.useEffect(() => {
-    dispatch(fetchPizzas());
-  }, [dispatch]);
+    dispatch(fetchPizzas(activeCategoryIndex, activeSortBy));
+  }, [activeCategoryIndex, activeSortBy, dispatch]);
 
   const onSelectedCategoryIndex = React.useCallback(
     (activeCategoryIndexFromUIClick) => {
       dispatch(setActiveCategory(activeCategoryIndexFromUIClick));
+    },
+    [dispatch],
+  );
+  const onSelectedFilter = React.useCallback(
+    (activeFilterFromUIClick) => {
+      dispatch(setActiveSortBy(activeFilterFromUIClick));
     },
     [dispatch],
   );
@@ -34,19 +47,24 @@ function Home() {
     'Закрытые',
   ];
   const filters = [
-    { name: 'популярности', type: 'popular' },
+    { name: 'популярности', type: 'rating' },
     { name: 'цене', type: 'price' },
-    { name: 'алфавиту', type: 'alfabet' },
+    { name: 'алфавиту', type: 'name' },
   ];
 
   return (
     <div className="container">
       <div className="content__top">
         <Categories
+          activeItem={activeCategoryIndex}
           onClickItem={onSelectedCategoryIndex}
           categories={categories}
         />
-        <SortPopup filters={filters} />
+        <SortPopup
+          onClickSortBy={onSelectedFilter}
+          filters={filters}
+          activeFilter={activeSortBy}
+        />
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">

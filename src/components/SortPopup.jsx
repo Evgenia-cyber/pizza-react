@@ -1,12 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
+import PropTypes from 'prop-types';
 
-const SortPopup = React.memo(({ filters }) => {
+const SortPopup = React.memo(({ filters, onClickSortBy, activeFilter }) => {
   const [visiblePopup, setVisiblePopup] = useState(false);
-  const [activeFilter, setActiveFilter] = useState(0);
 
   const sortRef = useRef();
 
-  const activeItem = filters[activeFilter].name;
+  const activeItem = filters.find((obj) => obj.type === activeFilter).name;
 
   const toggleVisiblePopup = () => {
     setVisiblePopup((visiblePopup) => !visiblePopup);
@@ -23,7 +23,7 @@ const SortPopup = React.memo(({ filters }) => {
   }, []);
 
   const onSelectedItem = (index) => {
-    setActiveFilter(index);
+    onClickSortBy(index); //при клике передаем в <Home/> индекс кликнутой категории в activeFilterFromUIClick
     setVisiblePopup(false);
   };
 
@@ -55,10 +55,10 @@ const SortPopup = React.memo(({ filters }) => {
               filters.map((filter, index) => (
                 <li
                   onClick={() => {
-                    onSelectedItem(index);
+                    onSelectedItem(filter.type);
                   }}
                   key={filter.type}
-                  className={index === activeFilter ? 'active' : ''}
+                  className={filter.type === activeFilter ? 'active' : ''}
                 >
                   {filter.name}
                 </li>
@@ -69,5 +69,12 @@ const SortPopup = React.memo(({ filters }) => {
     </div>
   );
 });
+
+SortPopup.propTypes = {
+  filters: PropTypes.arrayOf(PropTypes.object).isRequired,
+  onClickSortBy: PropTypes.func.isRequired,
+  activeFilter: PropTypes.string.isRequired,
+};
+SortPopup.defaultProps = { filters: [] };
 
 export default SortPopup;
