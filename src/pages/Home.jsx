@@ -2,13 +2,21 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Categories, SortPopup } from '../components';
 import PizzaBlock from '../components/PizzaBlock';
+import PizzaLoadingBlock from '../components/PizzaLoadingBlock';
 import { setActiveCategory } from '../redux/reducers/filterReducer';
+import { fetchPizzas } from '../redux/reducers/pizzasReducer';
 
 function Home() {
   const dispatch = useDispatch();
-  const { pizzas } = useSelector((state) => ({
+
+  const { pizzas, isLoaded } = useSelector((state) => ({
     pizzas: state.pizzasReducer.pizzas,
+    isLoaded: state.pizzasReducer.isLoaded,
   }));
+
+  React.useEffect(() => {
+    dispatch(fetchPizzas());
+  }, [dispatch]);
 
   const onSelectedCategoryIndex = React.useCallback(
     (activeCategoryIndexFromUIClick) => {
@@ -42,8 +50,9 @@ function Home() {
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">
-        {pizzas &&
-          pizzas.map((pizza) => <PizzaBlock key={pizza.id} {...pizza} />)}
+        {isLoaded
+          ? pizzas.map((pizza) => <PizzaBlock key={pizza.id} {...pizza} />)
+          : Array.from(Array(10), (_, i) => <PizzaLoadingBlock key={i} />)}
       </div>
     </div>
   );
