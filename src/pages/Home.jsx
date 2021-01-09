@@ -77,7 +77,9 @@ function Home() {
                 key={pizza.id}
                 {...pizza}
                 onClickAddPizzaToCart={onClickAddPizza}
-                countInCart={cartItems[pizza.id] && cartItems[pizza.id].length}
+                countInCart={
+                  cartItems[pizza.id] && cartItems[pizza.id].items.length
+                }
               />
             ))
           : Array(10)

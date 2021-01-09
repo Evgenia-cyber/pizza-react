@@ -32,7 +32,7 @@ export const fetchPizzas = (activeCategory, activeFilter) => (dispatch) => {
   dispatch(isLoading(true));
   axios
     .get(
-      `http://localhost:3001/pizzas?${
+      `/pizzas?${
         activeCategory === 0 ? '' : `category=${activeCategory}`
       }&_sort=${activeFilter}&_order=asc`,
     )
