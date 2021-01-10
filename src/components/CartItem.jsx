@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Button from './Button';
 
 function CartItem({
@@ -108,5 +109,18 @@ function CartItem({
     </div>
   );
 }
+
+CartItem.propTypes = {
+  id: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  size: PropTypes.number.isRequired,
+  imageUrl: PropTypes.string.isRequired,
+  totalGroupPrice: PropTypes.number.isRequired,
+  totalGroupCount: PropTypes.number.isRequired,
+  deleteGroup: PropTypes.func.isRequired,
+  plusItem: PropTypes.func.isRequired,
+  minusItem: PropTypes.func.isRequired,
+};
 
 export default CartItem;

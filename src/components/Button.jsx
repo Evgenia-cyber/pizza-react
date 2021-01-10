@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 function Button({ children, className, onItemClick }) {
   return (
@@ -7,5 +8,11 @@ function Button({ children, className, onItemClick }) {
     </button>
   );
 }
+
+Button.propTypes = {
+  children: PropTypes.node.isRequired,
+  onClickItem: PropTypes.func,
+  className: PropTypes.string.isRequired,
+};
 
 export default Button;
